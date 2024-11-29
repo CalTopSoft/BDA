@@ -1,6 +1,0 @@
-# Ignorar entorno virtual
-mi_entorno/
-
-# Ignorar archivos de Python compilados
-*.pyc
-__pycache__/
