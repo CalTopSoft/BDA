@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Iniciar Datos</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    <!-- Enlace a Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="contenedor">
+        <div class="izquierda">
+            <img src="../static/images/alumno.png" alt="Logo TOUKA" class="logo">
+            <h2>Colegio Instituto Coello</h2>
+        </div>
+        <div class="derecha">
+            <h2>Inicio de sesión</h2>
+            <!-- Enviar datos al servidor usando POST -->
+            <form id="login-form" action="/login" method="POST">
+                <!-- Campo de correo con ícono -->
+                <div class="campo">
+                    <i class="fas fa-envelope icono"></i>
+                    <input type="email" id="correo" name="correo" placeholder="Correo" required>
+                </div>
+                <!-- Campo de contraseña con ícono y botón de ojo -->
+                <div class="campo">
+                    <i class="fas fa-lock icono"></i>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                    <i class="fas fa-eye ojo" onclick="togglePasswordVisibility()"></i>
+                </div>
+                <button type="submit" class="boton">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Iniciar
+                </button>
+            </form>
+
+            <!-- Mostrar mensaje de error si las credenciales son incorrectas -->
+            {% if error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal para el mensaje de error -->
+    <div id="modal" class="modal" style="display: none;">
+        <div class="modal-contenido">
+            <h2>Error</h2>
+            <p>La contraseña es incorrecta.</p>
+            <button onclick="ocultarError()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para mostrar/ocultar la contraseña
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('contrasena');
+            const ojoIcon = document.querySelector('.ojo');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                ojoIcon.classList.remove('fa-eye');
+                ojoIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                ojoIcon.classList.remove('fa-eye-slash');
+                ojoIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>
